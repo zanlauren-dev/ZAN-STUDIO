@@ -16,12 +16,78 @@
     h1 {
       margin-bottom: 20px;
     }
-    /* Back button style */
+    /* Glass Card Style */
+    .glass-card {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-radius: 15px;
+      padding: 30px;
+      margin: 20px auto;
+      max-width: 400px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    /* Facebook Button with loading effect and larger padding */
+    .facebook-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: rgba(255, 255, 255, 0.2);
+      padding: 20px 30px; /* increased padding for a bigger button */
+      border-radius: 15px;
+      cursor: pointer;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1.2rem; /* slightly larger font */
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.4s ease;
+      margin-bottom: 20px;
+    }
+    .facebook-btn:hover {
+      background-color: rgba(255, 255, 255, 0.3);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+    }
+    /* Spinner styles */
+    .spinner {
+      border: 4px solid #f3f3f3;
+      border-top: 4px solid #00ffe1;
+      border-radius: 50%;
+      width: 24px;
+      height: 24px;
+      animation: spin 1s linear infinite;
+      margin-left: 15px;
+      display: none;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    /* Facebook Logo - larger size */
+    .facebook-logo {
+      width: 40px; /* bigger logo */
+      height: 40px;
+      margin-right: 15px;
+      transition: transform 0.3s ease;
+    }
+    /* Developer label styles */
+    .developer-label {
+      font-weight: bold;
+      font-size: 1.2rem;
+      margin-top: 10px;
+      color: #0074FF;
+    }
+    /* Back button styles */
     .back-link {
       display: inline-block;
       margin-top: 30px;
       padding: 12px 24px;
-      background-color: #00ffe1;
+      background-color: #36C9B3;
       color: #000;
       border-radius: 8px;
       text-decoration: none;
@@ -31,7 +97,7 @@
       box-shadow: 0 4px 12px rgba(0,0,0,0.4);
     }
     .back-link:hover {
-      background-color: #00cbb4;
+      background-color: #8A8A8A;
       transform: translateY(-3px);
       box-shadow: 0 8px 20px rgba(0,0,0,0.6);
     }
@@ -40,6 +106,45 @@
 <body>
   <h1>Contact Us</h1>
   <p>If you have any questions, feel free to reach out!</p>
+
+  <!-- Glass Card with Facebook Button and Developer Label -->
+  <div class="glass-card">
+    <button class="facebook-btn" id="fbButton" aria-label="Message us on Facebook">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/0/05/Facebook_Logo_(2019).png" alt="Facebook Logo" class="facebook-logo"/>
+      Message us on Facebook
+      <div class="spinner" id="loader"></div>
+    </button>
+    <div class="developer-label">This Developer</div>
+  </div>
+  
+  <!-- Back Button -->
   <a href="index.html" class="back-link">Back to Home</a>
+
+  <script>
+    const btn = document.getElementById('fbButton');
+    const loader = document.getElementById('loader');
+
+    btn.addEventListener('click', () => {
+      // Show loader
+      loader.style.display = 'block';
+
+      // Animate the button (scale down slightly)
+      btn.style.transform = 'scale(0.98)';
+      btn.style.opacity = '0.8';
+
+      // Simulate loading and then open link
+      setTimeout(() => {
+        // Reset button style
+        btn.style.transform = 'scale(1)';
+        btn.style.opacity = '1';
+
+        // Hide loader
+        loader.style.display = 'none';
+
+        // Open Facebook Messenger link
+        window.open('https://www.facebook.com/rixx.carti', '_blank');
+      }, 1000); // 1 second delay for effect
+    });
+  </script>
 </body>
 </html>
