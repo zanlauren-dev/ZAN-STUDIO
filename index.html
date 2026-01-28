@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Zan Studio</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  body {
+    font-family: 'Inter', sans-serif;
+    background-color: #0d0d0d;
+    background-image: linear-gradient(135deg, #1a1a1a, #000000);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    color: #fff;
+    overflow-x: hidden;
+  }
+  nav {
+    backdrop-filter: blur(10px);
+    background: rgba(20, 20, 20, 0.5);
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    animation: slideDown 1s ease forwards;
+  }
+  @keyframes slideDown {
+    from { transform: translateY(-100%); }
+    to { transform: translateY(0); }
+  }
+  .logo {
+    font-size: 1.8rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    color: #00ffe1;
+    animation: fadeIn 1s ease;
+  }
+  .nav-links {
+    display: flex;
+    gap: 1.5rem;
+    animation: fadeIn 1s ease;
+  }
+  .nav-links a {
+    text-decoration: none;
+    color: #00ffe1;
+    font-weight: 500;
+    padding: 0.8rem 1.2rem;
+    border-radius: 8px;
+    background: rgba(255,255,255,0.05);
+    transition: all 0.3s ease;
+  }
+  .nav-links a:hover {
+    background: rgba(0, 255, 225, 0.2);
+    transform: translateY(-2px);
+  }
+  .menu-toggle {
+    display: none;
+    cursor: pointer;
+    font-size: 1.8rem;
+    color: #00ffe1;
+    animation: fadeIn 1s ease;
+  }
+  @media(max-width:768px){
+    .nav-links {
+      position: absolute;
+      top: 70px;
+      right: 20px;
+      background: rgba(20,20,20,0.7);
+      backdrop-filter: blur(10px);
+      flex-direction: column;
+      padding: 1rem;
+      border-radius: 10px;
+      opacity: 0;
+      pointer-events: none;
+      max-height: 0;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+    .nav-links.show {
+      opacity: 1;
+      pointer-events: auto;
+      max-height: 500px;
+    }
+    .menu-toggle {
+      display: block;
+    }
+  }
+  .hero {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 6rem 2rem 2rem 2rem;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+    border-radius: 20px;
+    margin: 80px 20px 20px 20px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.6);
+    transition: all 0.5s ease;
+    animation: fadeInUp 1s ease;
+  }
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .hero h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: #00ffe1;
+    animation: fadeIn 1.2s ease;
+  }
+  .hero p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    max-width: 600px;
+    color: #ccc;
+    animation: fadeIn 1.4s ease;
+  }
+  .cta-btn {
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    background: rgba(0,255,225,0.2);
+    color: #fff;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+  }
+  .cta-btn:hover {
+    background: rgba(0,255,225,0.3);
+    transform: scale(1.05);
+  }
+  footer {
+    padding: 2rem;
+    text-align: center;
+    background: rgba(20,20,20,0.4);
+    backdrop-filter: blur(10px);
+    margin-top: 2rem;
+    font-size: 0.9rem;
+    color: #888;
+    animation: fadeIn 1s ease;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav>
+  <div class="logo">Zan Studio</div>
+  <div class="menu-toggle" id="menuToggle">☰</div>
+  <div class="nav-links" id="navLinks">
+    <a href="index.html">Home</a>
+    <a href="services.html">Services</a>
+    <a href="about.html">About</a>
+    <a href="contacts.html">Contact</a>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <h1>Welcome to Zan Dev Studio</h1>
+  <p>For the successful submission of your projects, we offer innovative designs, professional solutions, and modern aesthetics. Let’s create something remarkable together.</p>
+  <a href="https://dnhs-web-portal.vercel.app" class="cta-btn">Get Started</a>
+</section>
+
+<!-- Footer -->
+<footer>
+  &copy; 2026 Zan Studio. All rights reserved.
+</footer>
+
+<script>
+  const menuToggle = document.getElementById('menuToggle');
+  const navLinks = document.getElementById('navLinks');
+  menuToggle.addEventListener('click', () => {
+    navLinks.classList.toggle('show');
+  });
+</script>
+
+</body>
+</html>
