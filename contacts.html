@@ -3,148 +3,594 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Contact Us</title>
+  <title>Contact Us - Zan Studio</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <!-- Phosphor Icons -->
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
   <style>
-    body {
-      background-color: #121212;
-      color: #eee;
-      font-family: Arial, sans-serif;
+    * {
       margin: 0;
-      padding: 20px;
-      text-align: center;
+      padding: 0;
+      box-sizing: border-box;
     }
-    h1 {
-      margin-bottom: 20px;
+
+    html {
+      scroll-behavior: smooth;
     }
-    /* Glass Card Style */
-    .glass-card {
-      background: rgba(255, 255, 255, 0.1);
+
+    body {
+      background-color: #0d0d0d;
+      background-image: 
+        radial-gradient(at 0% 0%, rgba(0, 255, 225, 0.08) 0px, transparent 50%),
+        radial-gradient(at 100% 0%, rgba(118, 75, 162, 0.08) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(0, 255, 225, 0.06) 0px, transparent 50%),
+        linear-gradient(135deg, #1a1a1a, #000000);
+      min-height: 100vh;
+      color: #eee;
+      font-family: 'Inter', Arial, sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* Navigation */
+    nav {
       backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      border-radius: 15px;
-      padding: 30px;
-      margin: 20px auto;
-      max-width: 400px;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+      background: rgba(20, 20, 20, 0.6);
+      width: 100%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 999;
       display: flex;
-      flex-direction: column;
+      justify-content: space-between;
       align-items: center;
+      padding: 1rem 3rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      animation: slideDown 0.6s ease forwards;
     }
-    /* Facebook Button with loading effect and larger padding */
-    .facebook-btn {
+
+    @keyframes slideDown {
+      from { transform: translateY(-100%); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: #00ffe1;
+      text-decoration: none;
+      transition: text-shadow 0.3s ease;
+    }
+
+    .logo:hover {
+      text-shadow: 0 0 20px rgba(0, 255, 225, 0.5);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .nav-link {
+      text-decoration: none;
+      color: #aaa;
+      font-weight: 500;
+      padding: 0.6rem 1.2rem;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.02);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .nav-link::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(0, 255, 225, 0.1), transparent);
+      transition: left 0.5s ease;
+    }
+
+    .nav-link:hover::before {
+      left: 100%;
+    }
+
+    .nav-link:hover {
+      color: #00ffe1;
+      background: rgba(0, 255, 225, 0.05);
+      transform: translateY(-2px);
+    }
+
+    .nav-link.active {
+      color: #00ffe1;
+      background: rgba(0, 255, 225, 0.1);
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 8rem 2rem 3rem;
+      text-align: center;
+      animation: fadeIn 1s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .hero h1 {
+      font-size: 3.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, #fff 0%, #00ffe1 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: fadeInUp 0.8s ease 0.2s forwards;
+      opacity: 0;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      color: #888;
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.7;
+      animation: fadeInUp 0.8s ease 0.4s forwards;
+      opacity: 0;
+    }
+
+    /* Contact Section */
+    .contact-section {
+      padding: 4rem 2rem 6rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 30px;
+    }
+
+    /* Glassmorphism Card */
+    .contact-card {
+      background: rgba(255, 255, 255, 0.03);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-radius: 24px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      padding: 40px 35px;
+      transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+      position: relative;
+      overflow: hidden;
+      animation: fadeInUp 0.6s ease forwards;
+      opacity: 0;
+    }
+
+    .contact-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(0, 255, 225, 0.3), transparent);
+      transform: scaleX(0);
+      transition: transform 0.4s ease;
+    }
+
+    .contact-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .contact-card::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(0, 255, 225, 0.03) 0%, transparent 70%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      pointer-events: none;
+    }
+
+    .contact-card:hover::after {
+      opacity: 1;
+    }
+
+    .contact-card:nth-child(1) { animation-delay: 0.1s; }
+    .contact-card:nth-child(2) { animation-delay: 0.2s; }
+    .contact-card:nth-child(3) { animation-delay: 0.3s; }
+
+    .contact-card:hover {
+      transform: translateY(-12px);
+      background: rgba(255, 255, 255, 0.06);
+      border-color: rgba(0, 255, 225, 0.15);
+      box-shadow: 
+        0 25px 50px rgba(0, 0, 0, 0.4),
+        0 0 30px rgba(0, 255, 225, 0.08);
+    }
+
+    .card-icon-wrapper {
+      width: 80px;
+      height: 80px;
+      border-radius: 20px;
+      background: rgba(0, 255, 225, 0.08);
       display: flex;
       align-items: center;
       justify-content: center;
-      background-color: rgba(255, 255, 255, 0.2);
-      padding: 20px 30px; /* increased padding for a bigger button */
-      border-radius: 15px;
-      cursor: pointer;
-      text-decoration: none;
-      font-weight: bold;
-      font-size: 1.2rem; /* slightly larger font */
-      color: #fff;
-      position: relative;
-      overflow: hidden;
+      margin-bottom: 25px;
       transition: all 0.4s ease;
-      margin-bottom: 20px;
+      position: relative;
     }
-    .facebook-btn:hover {
-      background-color: rgba(255, 255, 255, 0.3);
-      transform: translateY(-3px);
-      box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+
+    .card-icon-wrapper::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 20px;
+      padding: 1px;
+      background: linear-gradient(135deg, rgba(0, 255, 225, 0.3), transparent);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      mask-composite: exclude;
+      opacity: 0;
+      transition: opacity 0.3s ease;
     }
-    /* Spinner styles */
-    .spinner {
-      border: 4px solid #f3f3f3;
-      border-top: 4px solid #00ffe1;
-      border-radius: 50%;
-      width: 24px;
-      height: 24px;
-      animation: spin 1s linear infinite;
-      margin-left: 15px;
-      display: none;
+
+    .contact-card:hover .card-icon-wrapper::before {
+      opacity: 1;
     }
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
+
+    .contact-card:hover .card-icon-wrapper {
+      transform: scale(1.1) rotate(5deg);
+      background: rgba(0, 255, 225, 0.12);
     }
-    /* Facebook Logo - larger size */
-    .facebook-logo {
-      width: 40px; /* bigger logo */
-      height: 40px;
-      margin-right: 15px;
+
+    .card-icon-wrapper i {
+      font-size: 2.2rem;
+      color: #00ffe1;
+      transition: all 0.4s ease;
+    }
+
+    .contact-card:hover .card-icon-wrapper i {
+      transform: scale(1.15);
+      filter: drop-shadow(0 0 10px rgba(0, 255, 225, 0.5));
+    }
+
+    .contact-card h3 {
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin-bottom: 15px;
+      color: #fff;
+      transition: color 0.3s ease;
+    }
+
+    .contact-card:hover h3 {
+      color: #00ffe1;
+    }
+
+    .contact-card p {
+      color: #777;
+      line-height: 1.75;
+      font-size: 1rem;
+      transition: color 0.3s ease;
+    }
+
+    .contact-card:hover p {
+      color: #aaa;
+    }
+
+    .contact-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: #00ffe1;
+      text-decoration: none;
+      font-weight: 500;
+      margin-top: 10px;
+      transition: all 0.3s ease;
+    }
+
+    .contact-link:hover {
+      gap: 15px;
+    }
+
+    .contact-link i {
+      font-size: 1.1rem;
       transition: transform 0.3s ease;
     }
-    /* Developer label styles */
-    .developer-label {
-      font-weight: bold;
-      font-size: 1.2rem;
-      margin-top: 10px;
-      color: #0074FF;
+
+    .contact-link:hover i {
+      transform: translateX(5px);
     }
-    /* Back button styles */
-    .back-link {
-      display: inline-block;
-      margin-top: 30px;
-      padding: 12px 24px;
-      background-color: #36C9B3;
-      color: #000;
-      border-radius: 8px;
+
+    /* Social Cards */
+    .social-card {
+      background: rgba(255, 255, 255, 0.03);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-radius: 24px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      padding: 30px 25px;
+      text-align: center;
+      transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+      position: relative;
+      overflow: hidden;
+      animation: fadeInUp 0.6s ease forwards;
+      opacity: 0;
       text-decoration: none;
-      font-weight: 600;
-      font-size: 1rem;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+      display: block;
     }
-    .back-link:hover {
-      background-color: #8A8A8A;
-      transform: translateY(-3px);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+
+    .social-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(0, 255, 225, 0.3), transparent);
+      transform: scaleX(0);
+      transition: transform 0.4s ease;
+    }
+
+    .social-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .social-card::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(0, 255, 225, 0.03) 0%, transparent 70%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      pointer-events: none;
+    }
+
+    .social-card:hover::after {
+      opacity: 1;
+    }
+
+    .social-card:nth-child(1) { animation-delay: 0.2s; }
+    .social-card:nth-child(2) { animation-delay: 0.3s; }
+
+    .social-card:hover {
+      transform: translateY(-8px);
+      background: rgba(255, 255, 255, 0.06);
+      border-color: rgba(0, 255, 225, 0.15);
+      box-shadow: 
+        0 20px 40px rgba(0, 0, 0, 0.4),
+        0 0 25px rgba(0, 255, 225, 0.08);
+    }
+
+    .social-icon {
+      width: 50px;
+      height: 50px;
+      margin: 0 auto 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 16px;
+      font-size: 1.8rem;
+      transition: all 0.4s ease;
+    }
+
+    .social-card:hover .social-icon {
+      transform: scale(1.1);
+    }
+
+    .facebook .social-icon {
+      background: rgba(66, 103, 178, 0.15);
+      color: #4267b2;
+    }
+
+    .facebook:hover .social-icon {
+      background: rgba(66, 103, 178, 0.3);
+      box-shadow: 0 0 20px rgba(66, 103, 178, 0.4);
+    }
+
+    .gmail .social-icon {
+      background: rgba(234, 67, 53, 0.15);
+      color: #ea4335;
+    }
+
+    .gmail:hover .social-icon {
+      background: rgba(234, 67, 53, 0.3);
+      box-shadow: 0 0 20px rgba(234, 67, 53, 0.4);
+    }
+
+    .social-card h4 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 5px;
+      transition: color 0.3s ease;
+    }
+
+    .social-card:hover h4 {
+      color: #00ffe1;
+    }
+
+    .social-card span {
+      font-size: 0.9rem;
+      color: #777;
+    }
+
+    /* Footer */
+    footer {
+      padding: 2rem;
+      text-align: center;
+      background: rgba(20, 20, 20, 0.4);
+      backdrop-filter: blur(10px);
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      animation: fadeIn 1s ease 0.8s forwards;
+      opacity: 0;
+    }
+
+    footer p {
+      color: #555;
+      font-size: 0.9rem;
+    }
+
+    /* Responsive */
+    @media(max-width: 768px) {
+      nav {
+        padding: 1rem 1.5rem;
+      }
+      .nav-links {
+        display: none;
+      }
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+      .hero p {
+        font-size: 1rem;
+      }
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+      .contact-card {
+        padding: 30px 25px;
+      }
+    }
+
+    /* Scroll animations */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
     }
   </style>
 </head>
 <body>
-  <h1>Contact Us</h1>
-  <p>If you have any questions, feel free to reach out!</p>
+  <!-- Navigation -->
+  <nav>
+    <a href="index.html" class="logo">ZAN STUDIO</a>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="services.html" class="nav-link">Services</a>
+      <a href="about.html" class="nav-link">About</a>
+      <a href="contacts.html" class="nav-link active">Contact</a>
+    </div>
+  </nav>
 
-  <!-- Glass Card with Facebook Button and Developer Label -->
-  <div class="glass-card">
-    <button class="facebook-btn" id="fbButton" aria-label="Message us on Facebook">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/0/05/Facebook_Logo_(2019).png" alt="Facebook Logo" class="facebook-logo"/>
-      Message us on Facebook
-      <div class="spinner" id="loader"></div>
-    </button>
-    <div class="developer-label">This Developer</div>
-  </div>
-  
-  <!-- Back Button -->
-  <a href="index.html" class="back-link">Back to Home</a>
+  <!-- Hero -->
+  <section class="hero reveal">
+    <h1>Contact Us</h1>
+    <p>Have questions or want to get in touch? We'd love to hear from you. Reach out through any of the channels below and we'll respond as soon as possible.</p>
+  </section>
 
+  <!-- Contact Cards -->
+  <section class="contact-section">
+    <div class="contact-grid">
+      <!-- Email Card -->
+      <div class="contact-card reveal">
+        <div class="card-icon-wrapper">
+          <i class="ph ph-envelope"></i>
+        </div>
+        <h3>Email Us</h3>
+        <p>Send us an email and we'll get back to you within 24 hours.</p>
+        <a href="mailto:hello@zanstudio.com" class="contact-link">
+          zanstudio01@gmail.com
+          <i class="ph ph-arrow-right"></i>
+        </a>
+      </div>
+
+      <!-- Phone Card -->
+      <div class="contact-card reveal">
+        <div class="card-icon-wrapper">
+          <i class="ph ph-phone"></i>
+        </div>
+        <h3>Call Us</h3>
+        <p>Prefer to talk? Give us a call during business hours.</p>
+        <a href="tel:+1234567890" class="contact-link">
+          +63 9099441957
+          <i class="ph ph-arrow-right"></i>
+        </a>
+      </div>
+
+      <!-- Location Card -->
+      <div class="contact-card reveal">
+        <div class="card-icon-wrapper">
+          <i class="ph ph-map-pin"></i>
+        </div>
+        <h3>Visit Us</h3>
+        <p>Come say hello at our office. We'd love to meet you in person.</p>
+        <a href="#" class="contact-link">
+          Maroroy, Daraga, Albay
+          <i class="ph ph-arrow-right"></i>
+        </a>
+      </div>
+    </div>
+
+    <!-- Social Media -->
+    <div class="contact-grid" style="margin-top: 30px;">
+      <a href="https://www.facebook.com/rixx.carti" target="_blank" class="social-card reveal facebook">
+        <div class="social-icon">
+          <i class="ph ph-facebook-logo"></i>
+        </div>
+        <h4>Facebook</h4>
+        <span>Follow us for updates</span>
+      </a>
+
+      <a href="mailto:zanstudio01@email.com" class="social-card reveal gmail">
+        <div class="social-icon">
+          <i class="ph ph-envelope"></i>
+        </div>
+        <h4>Gmail</h4>
+        <span>Send us an email</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2026 Zan Studio. All rights reserved.</p>
+  </footer>
+
+  <!-- Scroll Animation Script -->
   <script>
-    const btn = document.getElementById('fbButton');
-    const loader = document.getElementById('loader');
+    // Scroll reveal animation
+    const reveals = document.querySelectorAll('.reveal');
 
-    btn.addEventListener('click', () => {
-      // Show loader
-      loader.style.display = 'block';
+    function revealOnScroll() {
+      for (let i = 0; i < reveals.length; i++) {
+        const windowHeight = window.innerHeight;
+        const elementTop = reveals[i].getBoundingClientRect().top;
+        const elementVisible = 150;
 
-      // Animate the button (scale down slightly)
-      btn.style.transform = 'scale(0.98)';
-      btn.style.opacity = '0.8';
+        if (elementTop < windowHeight - elementVisible) {
+          reveals[i].classList.add('active');
+        }
+      }
+    }
 
-      // Simulate loading and then open link
-      setTimeout(() => {
-        // Reset button style
-        btn.style.transform = 'scale(1)';
-        btn.style.opacity = '1';
-
-        // Hide loader
-        loader.style.display = 'none';
-
-        // Open Facebook Messenger link
-        window.open('https://www.facebook.com/rixx.carti', '_blank');
-      }, 1000); // 1 second delay for effect
-    });
+    window.addEventListener('scroll', revealOnScroll);
+    revealOnScroll(); // Check on load
   </script>
 </body>
 </html>
