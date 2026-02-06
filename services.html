@@ -3,81 +3,119 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Services</title>
+  <title>Services - Zan Studio</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <!-- Phosphor Icons -->
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
   <style>
-    body {
-      background-color: #121212;
-      color: #eee;
-      font-family: Arial, sans-serif;
+    * {
       margin: 0;
-      padding: 20px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      min-height: 100vh;
+      padding: 0;
       box-sizing: border-box;
     }
 
-    h1 {
-      text-align: center;
-      margin-bottom: 20px;
+    html {
+      scroll-behavior: smooth;
     }
 
-    /* Button to show services - professional style */
-    .show-services-btn {
-      padding: 12px 30px;
-      background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-      color: #fff;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: 600;
-      font-size: 1rem;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-      margin-bottom: 20px;
+    body {
+      background-color: #0d0d0d;
+      background-image: 
+        radial-gradient(at 0% 0%, rgba(0, 255, 225, 0.08) 0px, transparent 50%),
+        radial-gradient(at 100% 0%, rgba(118, 75, 162, 0.08) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(0, 255, 225, 0.06) 0px, transparent 50%),
+        linear-gradient(135deg, #1a1a1a, #000000);
+      min-height: 100vh;
+      color: #eee;
+      font-family: 'Inter', Arial, sans-serif;
+      overflow-x: hidden;
     }
 
-    .show-services-btn:hover {
-      background: linear-gradient(135deg, #3bb1f8 0%, #00b6e2 100%);
-      box-shadow: 0 8px 16px rgba(0,0,0,0.3);
-      transform: translateY(-2px);
-    }
-
-    /* Back to Home button styling */
-    .back-link {
-      padding: 12px 24px;
-      background-color: #00ffe1;
-      color: #000;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 1rem;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
-    }
-
-    .back-link:hover {
-      background-color: #00cbb4;
-      transform: translateY(-3px);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.6);
-    }
-
-    /* Modal styles */
-    .modal {
-      display: none; /* hidden by default */
+    /* Navigation */
+    nav {
+      backdrop-filter: blur(10px);
+      background: rgba(20, 20, 20, 0.6);
+      width: 100%;
       position: fixed;
       top: 0;
       left: 0;
+      z-index: 999;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 3rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      animation: slideDown 0.6s ease forwards;
+    }
+
+    @keyframes slideDown {
+      from { transform: translateY(-100%); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: #00ffe1;
+      text-decoration: none;
+      transition: text-shadow 0.3s ease;
+    }
+
+    .logo:hover {
+      text-shadow: 0 0 20px rgba(0, 255, 225, 0.5);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .nav-link {
+      text-decoration: none;
+      color: #aaa;
+      font-weight: 500;
+      padding: 0.6rem 1.2rem;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.02);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .nav-link::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
       width: 100%;
       height: 100%;
-      background-color: rgba(18, 18, 18, 0.85);
-      justify-content: center;
-      align-items: center;
-      z-index: 1000;
-      padding: 20px;
-      box-sizing: border-box;
-      animation: fadeIn 0.3s ease;
+      background: linear-gradient(90deg, transparent, rgba(0, 255, 225, 0.1), transparent);
+      transition: left 0.5s ease;
+    }
+
+    .nav-link:hover::before {
+      left: 100%;
+    }
+
+    .nav-link:hover {
+      color: #00ffe1;
+      background: rgba(0, 255, 225, 0.05);
+      transform: translateY(-2px);
+    }
+
+    .nav-link.active {
+      color: #00ffe1;
+      background: rgba(0, 255, 225, 0.1);
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 8rem 2rem 3rem;
+      text-align: center;
+      animation: fadeIn 1s ease;
     }
 
     @keyframes fadeIn {
@@ -85,95 +123,371 @@
       to { opacity: 1; }
     }
 
-    /* Modal content box - elegant style */
-    .modal-content {
-      background-color: #222;
-      padding: 40px 30px;
-      border-radius: 12px;
-      max-width: 700px;
-      width: 100%;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+    .hero h1 {
+      font-size: 3.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, #fff 0%, #00ffe1 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: fadeInUp 0.8s ease 0.2s forwards;
+      opacity: 0;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      color: #888;
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.7;
+      animation: fadeInUp 0.8s ease 0.4s forwards;
+      opacity: 0;
+    }
+
+    /* Services Section */
+    .services-section {
+      padding: 4rem 2rem 6rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 30px;
+    }
+
+    /* Glassmorphism Card */
+    .service-card {
+      background: rgba(255, 255, 255, 0.03);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-radius: 24px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      padding: 40px 35px;
+      transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
       position: relative;
-      transition: all 0.3s ease;
+      overflow: hidden;
+      animation: fadeInUp 0.6s ease forwards;
+      opacity: 0;
     }
 
-    /* Close button - clean style */
-    .close-btn {
+    .service-card::before {
+      content: '';
       position: absolute;
-      top: 15px;
-      right: 20px;
-      background: none;
-      border: none;
-      color: #ccc;
-      font-size: 1.8rem;
-      cursor: pointer;
-      transition: color 0.3s ease, transform 0.3s ease;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(0, 255, 225, 0.3), transparent);
+      transform: scaleX(0);
+      transition: transform 0.4s ease;
     }
 
-    .close-btn:hover {
+    .service-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .service-card::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(0, 255, 225, 0.03) 0%, transparent 70%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      pointer-events: none;
+    }
+
+    .service-card:hover::after {
+      opacity: 1;
+    }
+
+    .service-card:nth-child(1) { animation-delay: 0.1s; }
+    .service-card:nth-child(2) { animation-delay: 0.2s; }
+    .service-card:nth-child(3) { animation-delay: 0.3s; }
+    .service-card:nth-child(4) { animation-delay: 0.4s; }
+
+    .service-card:hover {
+      transform: translateY(-12px);
+      background: rgba(255, 255, 255, 0.06);
+      border-color: rgba(0, 255, 225, 0.15);
+      box-shadow: 
+        0 25px 50px rgba(0, 0, 0, 0.4),
+        0 0 30px rgba(0, 255, 225, 0.08);
+    }
+
+    .card-icon-wrapper {
+      width: 80px;
+      height: 80px;
+      border-radius: 20px;
+      background: rgba(0, 255, 225, 0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 25px;
+      transition: all 0.4s ease;
+      position: relative;
+    }
+
+    .card-icon-wrapper::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 20px;
+      padding: 1px;
+      background: linear-gradient(135deg, rgba(0, 255, 225, 0.3), transparent);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      mask-composite: exclude;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .service-card:hover .card-icon-wrapper::before {
+      opacity: 1;
+    }
+
+    .service-card:hover .card-icon-wrapper {
+      transform: scale(1.1) rotate(5deg);
+      background: rgba(0, 255, 225, 0.12);
+    }
+
+    .card-icon-wrapper i {
+      font-size: 2.2rem;
+      color: #00ffe1;
+      transition: all 0.4s ease;
+    }
+
+    .service-card:hover .card-icon-wrapper i {
+      transform: scale(1.15);
+      filter: drop-shadow(0 0 10px rgba(0, 255, 225, 0.5));
+    }
+
+    .service-card h3 {
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin-bottom: 15px;
       color: #fff;
-      transform: scale(1.2);
+      transition: color 0.3s ease;
     }
 
-    /* List styles */
-    ul {
-      list-style: none;
-      padding: 0;
-      margin-top: 20px;
+    .service-card:hover h3 {
+      color: #00ffe1;
     }
-    li {
-      padding: 12px 0;
-      font-size: 1.1rem;
-      border-bottom: 1px solid #444;
-      transition: background-color 0.3s ease;
+
+    .service-card p {
+      color: #777;
+      line-height: 1.75;
+      font-size: 1rem;
+      transition: color 0.3s ease;
     }
-    li:last-child {
-      border-bottom: none;
+
+    .service-card:hover p {
+      color: #aaa;
     }
-    li:hover {
-      background-color: rgba(255, 255, 255, 0.1);
-      cursor: pointer;
+
+    .card-arrow {
+      position: absolute;
+      bottom: 35px;
+      right: 35px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(0, 255, 225, 0.05);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.4s ease;
+      opacity: 0;
+      transform: translateX(-10px);
+    }
+
+    .service-card:hover .card-arrow {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .card-arrow i {
+      color: #00ffe1;
+      font-size: 1.2rem;
+      transition: transform 0.3s ease;
+    }
+
+    .service-card:hover .card-arrow i {
+      transform: translateX(5px);
+    }
+
+    /* Footer */
+    footer {
+      padding: 2rem;
+      text-align: center;
+      background: rgba(20, 20, 20, 0.4);
+      backdrop-filter: blur(10px);
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      animation: fadeIn 1s ease 0.8s forwards;
+      opacity: 0;
+    }
+
+    footer p {
+      color: #555;
+      font-size: 0.9rem;
+    }
+
+    /* Responsive */
+    @media(max-width: 768px) {
+      nav {
+        padding: 1rem 1.5rem;
+      }
+      .nav-links {
+        display: none;
+      }
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+      .hero p {
+        font-size: 1rem;
+      }
+      .services-grid {
+        grid-template-columns: 1fr;
+      }
+      .service-card {
+        padding: 30px 25px;
+      }
+    }
+
+    /* Scroll animations */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
     }
   </style>
 </head>
 <body>
-  <h1>Our Services</h1>
-  <button class="show-services-btn" id="showServicesBtn">View Our Services</button>
-
-  <!-- Modal -->
-  <div class="modal" id="servicesModal">
-    <div class="modal-content">
-      <button class="close-btn" id="closeModal">&times;</button>
-      <h2 style="margin-top: 0; color: #eee;">Services Offered</h2>
-      <ul>
-        <li>Innovative Design Solutions</li>
-        <li>Professional Consulting</li>
-        <li>Modern Aesthetics</li>
-        <li>Glassphormism Design</li>
-      </ul>
+  <!-- Navigation -->
+  <nav>
+    <a href="index.html" class="logo">ZAN STUDIO</a>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="services.html" class="nav-link active">Services</a>
+      <a href="about.html" class="nav-link">About</a>
+      <a href="contacts.html" class="nav-link">Contact</a>
     </div>
-  </div>
+  </nav>
 
-  <!-- Back to Home button sa ilalim ng "View Our Services" button -->
-  <a href="index.html" class="back-link">Back to Home</a>
+  <!-- Hero -->
+  <section class="hero reveal">
+    <h1>Our Services</h1>
+    <p>We deliver innovative solutions that transform your vision into stunning digital experiences. Explore our professional services designed to elevate your brand.</p>
+  </section>
+
+  <!-- Services Grid -->
+  <section class="services-section">
+    <div class="services-grid">
+      <!-- Service Card 1 -->
+      <div class="service-card reveal">
+        <div class="card-icon-wrapper">
+          <i class="ph ph-lightbulb"></i>
+        </div>
+        <h3>Innovative Design Solutions</h3>
+        <p>Creative and modern design approaches tailored to your unique needs, ensuring your brand stands out in a crowded digital landscape.</p>
+        <div class="card-arrow">
+          <i class="ph ph-arrow-right"></i>
+        </div>
+      </div>
+
+      <!-- Service Card 2 -->
+      <div class="service-card reveal">
+        <div class="card-icon-wrapper">
+          <i class="ph ph-cube"></i>
+        </div>
+        <h3>Glassmorphism Design</h3>
+        <p>Beautiful frosted glass effects with depth and elegance that add a modern, sophisticated touch to your web applications.</p>
+        <div class="card-arrow">
+          <i class="ph ph-arrow-right"></i>
+        </div>
+      </div>
+
+      <!-- Service Card 3 -->
+      <div class="service-card reveal">
+        <div class="card-icon-wrapper">
+          <i class="ph ph-users-three"></i>
+        </div>
+        <h3>Professional Consulting</h3>
+        <p>Expert guidance and strategic consultation to help you make informed decisions that drive business growth and success.</p>
+        <div class="card-arrow">
+          <i class="ph ph-arrow-right"></i>
+        </div>
+      </div>
+
+      <!-- Service Card 4 -->
+      <div class="service-card reveal">
+        <div class="card-icon-wrapper">
+          <i class="ph ph-sparkle"></i>
+        </div>
+        <h3>Modern Aesthetics</h3>
+        <p>Cutting-edge visual styles and trends that keep your brand ahead of the curve, delivering memorable user experiences.</p>
+        <div class="card-arrow">
+          <i class="ph ph-arrow-right"></i>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2026 Zan Studio. All rights reserved.</p>
+  </footer>
 
   <script>
-    const showBtn = document.getElementById('showServicesBtn');
-    const modal = document.getElementById('servicesModal');
-    const closeBtn = document.getElementById('closeModal');
+    // Scroll reveal animations
+    const reveals = document.querySelectorAll('.reveal');
 
-    showBtn.addEventListener('click', () => {
-      modal.style.display = 'flex';
-    });
+    function revealOnScroll() {
+      const windowHeight = window.innerHeight;
+      const revealPoint = 100;
 
-    closeBtn.addEventListener('click', () => {
-      modal.style.display = 'none';
-    });
+      reveals.forEach((reveal, index) => {
+        const revealTop = reveal.getBoundingClientRect().top;
 
-    window.addEventListener('click', (e) => {
-      if (e.target === modal) {
-        modal.style.display = 'none';
-      }
+        if (revealTop < windowHeight - revealPoint) {
+          // Add staggered delay based on index
+          setTimeout(() => {
+            reveal.classList.add('active');
+          }, index * 100);
+        }
+      });
+    }
+
+    window.addEventListener('scroll', revealOnScroll);
+    revealOnScroll(); // Check on load
+
+    // Smooth scroll for navigation
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth'
+          });
+        }
+      });
     });
   </script>
 </body>
